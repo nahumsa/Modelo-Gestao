@@ -110,7 +110,7 @@ def database_to_dataframe():
 
 df = database_to_dataframe()
 
-series = week_visualisation(df)
+series = week_visualization(df)
 
 fig2 = px.bar(series, x='Semana/Ano', y=0 , color='Tipo') 
 

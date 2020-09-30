@@ -15,6 +15,6 @@ def generate_table(dataframe, max_rows=10):
         ])
     ])
 
-def week_visualisation(df):
+def week_visualization(df):
     df['Semana/Ano'] = df['dataCriada'].apply(lambda x: "%d/%d" % (x.isocalendar()[1], x.year))
     return df.groupby(['Semana/Ano' , 'Tipo']).size().reset_index()
