@@ -112,8 +112,6 @@ df = database_to_dataframe()
 
 series = week_visualization(df)
 
-fig2 = px.bar(series, x='Semana/Ano', y=0 , color='Tipo') 
-
 
 fig = px.histogram(df, x="dataCriada", 
                    title='Tipos por data criada',
@@ -125,6 +123,12 @@ fig.update_layout(
     yaxis_title_text='Número de pedidos', 
     bargap=0.2, 
     bargroupgap=0.1 
+)
+
+fig2 = px.bar(series, x='Semana/Ano', y=0 , color='Tipo') 
+fig2.update_layout(
+    title_text='Visualização Semanal',     
+    yaxis_title_text='Número de pedidos Semanais', 
 )
 
 app.layout = html.Div(children=[        
