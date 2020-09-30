@@ -14,16 +14,10 @@ table, td, th {
 
 table {
     border-collapse: collapse;
-    width: 100%;
-}
-
-th {
-    height: 30px;
-}
-
-td {
-    text-align: center;
-    padding: 5px;
+  }
+  
+table, th, td {
+    border: 1px solid black;
 }
 
 .form {
