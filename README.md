@@ -1,6 +1,6 @@
 # Case: Uma plataforma de gestão de manutenção com formulários online e dashboard de análise dos dados.
 
-Abordagem: Separarei esse problema em três etapas: A primeira é para a plataforma de gestão de manutação onde será necessário criar formulários online e colocar esses formulários em uma database. A segunda etapa consistem em criar um dashboard para visualização dos dados. A terceira e última é fazer o deploy da aplicação web online para que possa ser utilizada.
+Abordagem: Separarei esse problema em três etapas: A primeira é para a plataforma de gestão de manutenção onde é necessário criar formulários online e colocar esses formulários em uma database. A segunda etapa consiste em criar um dashboard para visualização dos dados. A terceira e última é fazer o deploy da aplicação web online para que possa ser utilizada.
 
 [Link para o app](https://gestao-modelo.herokuapp.com/)
 
