@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Gestão</title>
+{% endblock %}
+
+{% block body %}
+<div class="content" style="text-align: center;">
+    <h1 style="text-align: left">Formulário</h1>   
+
+    <div style="text-align: left;" class="form">
+        <form action="/" method="POST">
+            <label for="id_equipamento">ID do equipamento:</label>
+            <input type="number" name="id_equipamento" id="id_equipamento" value="01">
+            <br><br>
+            <label for="tipo_servico">Tipo do serviço:</label>
+            <select id="tipo_servico" name="tipo_servico" required>
+                <option value=""></option>
+                <option value="preventivo">preventivo</option>
+                <option value="corretivo">corretivo</option>
+                <option value="planejada">planejada</option>        
+            </select>
+            <br><br>
+            <!-- <label for="data_submissao">Data de submissão:</label>
+            <input type="date" name="data_submissao" id="data_submissao"> -->
+            <!-- <br>
+            <br> -->
+            
+            <input style="width: 300px;
+            height: 100px;
+            padding: 50px;
+            border: 1px solid red;
+            box-sizing: border-box;" type="text" name="desc_servico" id="desc_servico" class="desc_servico" value="Descrição do serviço">            
+            <br>
+            <br>
+            <input type="submit" id="Add Task">
+        </form>      
+        <br>
+        <form action="/all_tasks">
+            <input type="submit" value="All tasks" />
+        </form>
+    </div>    
+    
+</div>
+{% endblock %}
