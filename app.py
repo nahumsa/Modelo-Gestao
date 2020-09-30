@@ -10,6 +10,8 @@ import pandas as pd
 import time
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
+from dashUtils import generate_table
+
 server = Flask(__name__)
 # Setting the database
 server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///servico.db'
@@ -77,22 +79,6 @@ def delete(id):
     except:
         return "There was a problem deleting that task"
 
-# @app.route("/update/<int:id>", methods=['GET', 'POST'])
-# def update(id):
-#     task = Todo.query.get_or_404(id)
-
-#     if request.method == 'POST':
-#         task.content = request.form['content']
-
-#         try: 
-#             db.session.commit()
-#             return redirect('/')
-        
-#         except:
-#             return "there was an issue updating your task"
-#     else:
-#         return render_template('update.html', task=task)
-
 
 #Import css
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -105,6 +91,9 @@ app = dash.Dash(
 )
 
 def database_to_dataframe():
+    """Transform the database into a dataframe.
+    
+    """
     servicos = Servico.query.order_by(Servico.date_created).all()
     
     row_list = []
@@ -118,31 +107,42 @@ def database_to_dataframe():
     df = pd.DataFrame(row_list)
     return df
 
-def generate_table(dataframe, max_rows=10):
-    return html.Table([
-        html.Thead(
-            html.Tr([html.Th(col) for col in dataframe.columns])
-        ),
-        html.Tbody([
-            html.Tr([
-                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-            ]) for i in range(min(len(dataframe), max_rows))
-        ])
-    ])
-
 
 df = database_to_dataframe()
-fig = px.bar(df, x="dataCriada", y="IDEquipamento", color="Tipo", barmode="group")
 
-app.layout = html.Div(children=[
+df['Semana/Ano'] = df['dataCriada'].apply(lambda x: "%d/%d" % (x.isocalendar()[1], x.year))
+series = df.groupby(['Semana/Ano' , 'Tipo']).size().reset_index()
+fig2 = px.bar(series, x='Semana/Ano', y=0 , color='Tipo') 
+
+
+fig = px.histogram(df, x="dataCriada", 
+                   title='Tipos por data criada',
+                   labels={'dataCriada':'Data Criada'}, 
+                   color="Tipo", barmode="group")
+
+fig.update_layout(
+    title_text='Tipos por data criada',     
+    yaxis_title_text='Número de pedidos', 
+    bargap=0.2, 
+    bargroupgap=0.1 
+)
+
+app.layout = html.Div(children=[        
+    dcc.Link('Homepage', href='/'),
     html.H1(children='Dashboard'),
     # generate_table(df),
 
     dcc.Graph(
-        id='example-graph',
+        id='hist1',
         figure=fig
-    )
-    ])
+    ),
+    
+    dcc.Graph(
+        id='bar',
+        figure=fig2
+    ),
+        ])
+
 
 if __name__ == "__main__":
     create_db = False
