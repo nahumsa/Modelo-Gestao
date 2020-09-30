@@ -10,7 +10,7 @@ import pandas as pd
 import time
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
-from dashUtils import generate_table
+from dashUtils import generate_table, week_visualization
 
 server = Flask(__name__)
 # Setting the database
@@ -110,8 +110,8 @@ def database_to_dataframe():
 
 df = database_to_dataframe()
 
-df['Semana/Ano'] = df['dataCriada'].apply(lambda x: "%d/%d" % (x.isocalendar()[1], x.year))
-series = df.groupby(['Semana/Ano' , 'Tipo']).size().reset_index()
+series = week_visualisation(df)
+
 fig2 = px.bar(series, x='Semana/Ano', y=0 , color='Tipo') 
 
 

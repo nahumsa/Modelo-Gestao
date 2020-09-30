@@ -15,19 +15,6 @@ def generate_table(dataframe, max_rows=10):
         ])
     ])
 
-def database_to_dataframe():
-    """Transform the database into a dataframe.
-    
-    """
-    servicos = Servico.query.order_by(Servico.date_created).all()
-    
-    row_list = []
-    for servico in servicos: 
-        row_list.append({"IDServico": servico.id,  
-                    "IDEquipamento": servico.id_equipamento, 
-                    "Tipo": servico.tipo_servico, 
-                    "Descricao": servico.desc_servico, 
-                    "dataCriada": servico.date_created.date(), 
-                    })
-    df = pd.DataFrame(row_list)
-    return df
+def week_visualisation(df):
+    df['Semana/Ano'] = df['dataCriada'].apply(lambda x: "%d/%d" % (x.isocalendar()[1], x.year))
+    return df.groupby(['Semana/Ano' , 'Tipo']).size().reset_index()
