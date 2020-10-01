@@ -24,7 +24,7 @@ Após isso, é preciso criar uma forma de interagir com a database para alterar 
 
 ## Ferramentas: Dash e Plotly
 
-Para o dashboard é necessário acessar a database que criamos anteriormente e demonstrar visualizações dos dados, portanto escolhi o [dash]([http://dash.plotly.com/](http://dash.plotly.com/)) para a criação do dashboard, pois esse pacote utiliza flask para gerar o dashboard e isso faz a integração entre os dois ser fácil. Para gerar os gráficos escolhi utilizar o plotly que é a biblioteca recomendada pelo dash.
+Para o dashboard é necessário acessar a database que criamos anteriormente e demonstrar visualizações dos dados, portanto escolhi o [dash](http://dash.plotly.com/) para a criação do dashboard, pois esse pacote utiliza flask para gerar o dashboard e isso faz a integração entre os dois ser fácil. Para gerar os gráficos escolhi utilizar o plotly que é a biblioteca recomendada pelo dash.
 
 Através disso, pode ser gerado gráficos e tabelas, como por exemplo:
 
